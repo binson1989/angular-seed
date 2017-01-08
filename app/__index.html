@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <p>Hello World</p>
+    <div ng-controller="MyController">
+        Hello {{greetMe}}!
+    </div>
+    <script src="bower_components/angular/angular.js"></script>
+    <!--<script src="bower_components/angular-route/angular-route.js"></script>-->
+    <script>
+        angular.module('myApp', [])
+            .controller('MyController', ['$scope', function ($scope) {
+                $scope.greetMe = 'Binson';
+            }]);
+
+        angular.element(function () {
+            angular.bootstrap(document, ['myApp']);
+        });
+
+        var features = ['feat 1', 'feat 2', 'feat 3'];
+        var featureData = {};
+        featureData['feat 1'] = {name: 'feature 1', subFeatures: ['sub 1', 'sub 2']};
+        featureData['feat 2'] = {name: 'feature 2', subFeatures: ['sub 3']};
+        featureData['feat 3'] = {name: 'feature 3', subFeatures: ['sub 4', 'sub 5']};
+        featureData['sub 1'] = {name: 'subfeature 1'};
+        featureData['sub 2'] = {name: 'subfeature 2'};
+        featureData['sub 3'] = {name: 'subfeature 3'};
+        featureData['sub 4'] = {name: 'subfeature 4'};
+        featureData['sub 5'] = {name: 'subfeature 5'};
+
+        var featurePermission = {};
+        featurePermission['feat 1'] = ['hello1'];
+        featurePermission['feat 2'] = ['hello2'];
+        featurePermission['feat 3'] = ['hello3'];
+        featurePermission['sub 1'] = ['hello11'];
+        featurePermission['sub 2'] = ['hello12'];
+        featurePermission['sub 3'] = ['hello21'];
+        featurePermission['sub 4'] = ['hello31'];
+        featurePermission['sub 5'] = ['hello32'];
+
+        var tabs = loop(['hello1', 'hello3', 'hello21', 'hello12', 'hello31'], features);
+
+        function loop(permissions, features) {
+            var tabs = [];
+            for(var i=0,j=features.length;i<j;i++) {
+                var feature = features[i];
+                if(featurePermission[feature].every((p) => permissions.indexOf(p) != -1)) {
+                    var featData = featureData[feature];
+                    if(featData.subFeatures) {
+                        var subtabs = loop(permissions, featData.subFeatures);
+                        featData.subData = subtabs;
+                    }
+                    tabs.push(featData);
+                }
+            }
+            return tabs;
+        }
+
+        console.log(tabs);
+
+    </script>
+</body>
+
+</html>

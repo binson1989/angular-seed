@@ -1,65 +1,34 @@
 <!DOCTYPE html>
-<html>
-
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="app.css">
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
 <body>
-    <p>Hello World</p>
-    <div ng-controller="MyController">
-        Hello {{greetMe}}!
-    </div>
-    <script src="bower_components/angular/angular.js"></script>
-    <!--<script src="bower_components/angular-route/angular-route.js"></script>-->
-    <script>
-        angular.module('myApp', [])
-            .controller('MyController', ['$scope', function ($scope) {
-                $scope.greetMe = 'Binson';
-            }]);
+  <div ng-controller="myCtrl">
+    <div test1 test2> </div>
+  </div>
 
-        angular.element(function () {
-            angular.bootstrap(document, ['myApp']);
-        });
-
-        var features = ['feat 1', 'feat 2', 'feat 3'];
-        var featureData = {};
-        featureData['feat 1'] = {name: 'feature 1', subFeatures: ['sub 1', 'sub 2']};
-        featureData['feat 2'] = {name: 'feature 2', subFeatures: ['sub 3']};
-        featureData['feat 3'] = {name: 'feature 3', subFeatures: ['sub 4', 'sub 5']};
-        featureData['sub 1'] = {name: 'subfeature 1'};
-        featureData['sub 2'] = {name: 'subfeature 2'};
-        featureData['sub 3'] = {name: 'subfeature 3'};
-        featureData['sub 4'] = {name: 'subfeature 4'};
-        featureData['sub 5'] = {name: 'subfeature 5'};
-
-        var featurePermission = {};
-        featurePermission['feat 1'] = ['hello1'];
-        featurePermission['feat 2'] = ['hello2'];
-        featurePermission['feat 3'] = ['hello3'];
-        featurePermission['sub 1'] = ['hello11'];
-        featurePermission['sub 2'] = ['hello12'];
-        featurePermission['sub 3'] = ['hello21'];
-        featurePermission['sub 4'] = ['hello31'];
-        featurePermission['sub 5'] = ['hello32'];
-
-        var tabs = loop(['hello1', 'hello3', 'hello21', 'hello12', 'hello31'], features);
-
-        function loop(permissions, features) {
-            var tabs = [];
-            for(var i=0,j=features.length;i<j;i++) {
-                var feature = features[i];
-                if(featurePermission[feature].every((p) => permissions.indexOf(p) != -1)) {
-                    var featData = featureData[feature];
-                    if(featData.subFeatures) {
-                        var subtabs = loop(permissions, featData.subFeatures);
-                        featData.subData = subtabs;
-                    }
-                    tabs.push(featData);
-                }
-            }
-            return tabs;
-        }
-
-        console.log(tabs);
-
-    </script>
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="app.js"></script>
+  <script src="view1/view1.js"></script>
+  <script src="view2/view2.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
 </body>
-
 </html>
